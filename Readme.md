@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Евгений Махов](https://up.htmlacademy.ru/univer-js1/1/user/2221679).
-* Наставник: `Павел Нюкало`(https://htmlacademy.ru/profile/nyukalopavel).
+* Наставник: [Павел Нюкало](https://htmlacademy.ru/profile/nyukalopavel).
 
 ---
 
