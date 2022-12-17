@@ -17,4 +17,6 @@ const getNonExistenObject = (existingObjects, min, max) => {
   return id;
 };
 
-export {getRandomInteger, getNonExistenObject};
+const keyIsEscape = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, getNonExistenObject, keyIsEscape};

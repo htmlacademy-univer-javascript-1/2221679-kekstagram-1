@@ -23,13 +23,6 @@ const loadComments = () => {
   }
 };
 
-closeButton.addEventListener('click', () => {
-  bigPicture.classList.add('hidden');
-  document.querySelector('body').classList.remove('modal-open');
-
-  document.removeEventListener('click', loadComments);
-});
-
 const onDocumentEscKeyDown = (evt) => {
   if (evt.key === 'Escape') {
     bigPicture.classList.add('hidden');
@@ -39,6 +32,14 @@ const onDocumentEscKeyDown = (evt) => {
     document.removeEventListener('click', loadComments);
   }
 };
+
+closeButton.addEventListener('click', () => {
+  bigPicture.classList.add('hidden');
+  document.querySelector('body').classList.remove('modal-open');
+
+  document.removeEventListener('keydown', onDocumentEscKeyDown);
+  document.removeEventListener('click', loadComments);
+});
 
 const addPictureEventHandler = (picture, pictureData) => {
   picture.addEventListener('click', () => {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/nouislider/nouislider.css">
+  <link rel="stylesheet" href="./nouislider/nouislider.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -210,8 +210,8 @@
 
   <!-- Сообщение с ошибкой загрузки изображения -->
   <template id="error">
-    <section class="error">
-      <div class="error__inner">
+    <section class="error popup">
+      <div class="error__inner inner">
         <h2 class="error__title">Ошибка загрузки файла</h2>
         <button type="button" class="error__button">Загрузить другой файл</button>
       </div>
@@ -220,10 +220,20 @@
 
   <!-- Сообщение об успешной загрузке изображения -->
   <template id="success">
-    <section class="success">
-      <div class="success__inner">
+    <section class="success popup">
+      <div class="success__inner inner">
         <h2 class="success__title">Изображение успешно загружено</h2>
         <button type="button" class="success__button">Круто!</button>
+      </div>
+    </section>
+  </template>
+
+  <!-- Сообщение с ошибкой загрузки изображений -->
+  <template id="load-error">
+    <section class="error popup">
+      <div class="error__inner inner">
+        <h2 class="error__title">Ошибка загрузки изображений</h2>
+        <button type="button" class="error__button">Закрыть</button>
       </div>
     </section>
   </template>
@@ -232,6 +242,7 @@
   <template id="messages">
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
+
   <script src="./nouislider/nouislider.js"></script>
   <script src="./pristine/pristine.min.js"></script>
   <script src="./js/main.js" type="module"></script>

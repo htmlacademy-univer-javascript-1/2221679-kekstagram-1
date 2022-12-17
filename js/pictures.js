@@ -1,4 +1,5 @@
-import {createdPictures} from './data.js';
+import { getRequest } from './server-data.js';
+import { loadErrored } from './upload-messages.js';
 import { addPictureEventHandler } from './full-picture.js';
 
 const pictureTemplate = document.querySelector('#picture').content;
@@ -24,6 +25,6 @@ const showPictures = (pictures) => {
   picturesList.appendChild(fragment);
 };
 
-showPictures(createdPictures);
+getRequest(showPictures, loadErrored, 'GET')();
 
 export {picturesList};

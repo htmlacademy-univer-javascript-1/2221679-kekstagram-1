@@ -79,6 +79,5 @@ const onHashtagInput = () => {
 };
 
 inputHashtag.addEventListener('input', onHashtagInput);
-inputForm.addEventListener('submit', onHashtagInput);
 
 export {inputHashtag};

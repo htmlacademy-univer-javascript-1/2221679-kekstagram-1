@@ -78,6 +78,19 @@ const setSliderOptions = (effect) => {
   effectLevel.value = options.MAX;
 };
 
+const setDefaultFilter = () => {
+  const defaultRadio = filtersList.querySelector('#effect-none');
+  defaultRadio.checked = true;
+
+  if (currentEffect !== '') {
+    imageElement.classList.remove(currentEffect);
+  }
+
+  currentEffect = '';
+
+  imageElement.style.filter = effects['none']();
+};
+
 const onFilterListClick = (evt) => {
   let target = evt.target;
 
@@ -109,3 +122,5 @@ const onSliderChange = () => {
 
 filtersList.addEventListener('click', onFilterListClick);
 sliderElement.noUiSlider.on('change', onSliderChange);
+
+export {setDefaultFilter};
