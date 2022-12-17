@@ -6,7 +6,7 @@ const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 const MIN_AVATAR_ID = 1;
 const MAX_AVATAR_ID = 6;
-const MAX_COMMENT_COUNT = 4;
+const MAX_COMMENT_COUNT = 20;
 
 const existingUsersIds = [];
 const existingCommentsIds = [];
