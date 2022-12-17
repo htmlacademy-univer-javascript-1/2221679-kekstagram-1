@@ -1,12 +1,33 @@
 import { createCommentItem } from './commets.js';
 
+const COMMENTS_TO_SHOW = 5;
+
 const bigPicture = document.querySelector('.big-picture');
 const closeButton = bigPicture.querySelector('.big-picture__cancel');
 const comments = bigPicture.querySelector('.social__comments');
+const loadButton = document.querySelector('.comments-loader');
+
+const loadComments = () => {
+  const commentsItems = comments.children;
+  const loadedCommentsCountElement = document.querySelector('.loaded-comments');
+  const loadedCommentsCount = parseInt(loadedCommentsCountElement.textContent, 10);
+  const currenntComments = parseInt(loadedCommentsCount, 10) + COMMENTS_TO_SHOW > commentsItems.length ? commentsItems.length - loadedCommentsCount : COMMENTS_TO_SHOW;
+
+  for (let i = 0; i < currenntComments; i++) {
+    document.querySelector('.social__comment.hidden').classList.remove('hidden');
+  }
+  loadedCommentsCountElement.textContent = loadedCommentsCount + currenntComments;
+
+  if (loadedCommentsCount + currenntComments === commentsItems.length) {
+    loadButton.classList.add('hidden');
+  }
+};
 
 closeButton.addEventListener('click', () => {
   bigPicture.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
+
+  document.removeEventListener('click', loadComments);
 });
 
 const onDocumentEscKeyDown = (evt) => {
@@ -15,6 +36,7 @@ const onDocumentEscKeyDown = (evt) => {
     document.querySelector('body').classList.remove('modal-open');
 
     document.removeEventListener('keydown', onDocumentEscKeyDown);
+    document.removeEventListener('click', loadComments);
   }
 };
 
@@ -31,12 +53,22 @@ const addPictureEventHandler = (picture, pictureData) => {
     pictureData.comments.forEach((comment) => {
       comments.appendChild(createCommentItem(comment));
     });
+    const commentsItems = comments.children;
+    bigPicture.querySelector('.loaded-comments').textContent = commentsItems.length > COMMENTS_TO_SHOW ? COMMENTS_TO_SHOW : commentsItems.length;
+    for (let i = COMMENTS_TO_SHOW; i < commentsItems.length; i++) {
+      commentsItems[i].classList.add('hidden');
+    }
 
-    bigPicture.querySelector('.social__comment-count').classList.add('hidden');
-    bigPicture.querySelector('.comments-loader').classList.add('hidden');
     document.querySelector('body').classList.add('modal-open');
 
     document.addEventListener('keydown', onDocumentEscKeyDown);
+
+    loadButton.addEventListener('click', loadComments);
+    if (commentsItems.length <= 5) {
+      loadButton.classList.add('hidden');
+    } else {
+      loadButton.classList.remove('hidden');
+    }
   });
 };
 
