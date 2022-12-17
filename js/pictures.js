@@ -1,29 +1,39 @@
-import {createdPictures} from './data.js';
-import { addPictureEventHandler } from './full-picture.js';
+import { onPictureClick } from './full-picture.js';
 
-const pictureTemplate = document.querySelector('#picture').content;
-const pictureItemTemplate = pictureTemplate.querySelector('.picture');
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesList = document.querySelector('.pictures');
-const fragment = new DocumentFragment;
+const picturesItems = [];
 
 const createPictureItem = (item) => {
-  const newPicture = pictureItemTemplate.cloneNode(true);
+  const newPicture = pictureTemplate.cloneNode(true);
   newPicture.querySelector('.picture__img').src = item.url;
   newPicture.querySelector('.picture__likes').textContent = item.likes;
   newPicture.querySelector('.picture__comments').textContent = item.comments.length;
 
-  addPictureEventHandler(newPicture, item);
+  onPictureClick(newPicture, item);
 
   return newPicture;
 };
 
-const showPictures = (pictures) => {
-  for (const item of pictures) {
-    fragment.appendChild(createPictureItem(item));
-  }
-  picturesList.appendChild(fragment);
+const deleteAllPictures = () => {
+  const pictures = picturesList.querySelectorAll('.picture');
+  pictures.forEach((picture) => {
+    picturesList.removeChild(picture);
+  });
 };
 
-showPictures(createdPictures);
+const showPictures = (pictures) => {
+  deleteAllPictures();
+  const fragment = new DocumentFragment;
+  pictures.forEach((picture) => fragment.appendChild(picture));
+  picturesList.appendChild(fragment);
+  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+};
 
-export {picturesList};
+const loadPictures = (pictures) => {
+  pictures.forEach((picture) => picturesItems.push(createPictureItem(picture)));
+  showPictures(picturesItems);
+};
+
+
+export { loadPictures, showPictures, picturesItems };

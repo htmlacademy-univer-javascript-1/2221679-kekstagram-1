@@ -1,3 +1,5 @@
+const DELAY = 500;
+
 const getRandomInteger = (min, max) => {
   if (min > max ){
     [min, max] = [max, min];
@@ -17,4 +19,23 @@ const getNonExistenObject = (existingObjects, min, max) => {
   return id;
 };
 
-export {getRandomInteger, getNonExistenObject};
+const keyIsEscape = (evt) => evt.key === 'Escape';
+
+const debounce = (callback, timeoutDelay = DELAY) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+function shuffle(array) {
+  array = array.slice();
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+export {getRandomInteger, getNonExistenObject, keyIsEscape, debounce, shuffle};

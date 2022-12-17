@@ -26,11 +26,12 @@ const sliderOptions = {
   }
 };
 
-const filtersList = document.querySelector('.effects__list');
-const imageElement = document.querySelector('.img-upload__preview').children[0];
-const sliderField = document.querySelector('.img-upload__effect-level');
-const sliderElement = document.querySelector('.effect-level__slider');
-const effectLevel = document.querySelector('.effect-level__value');
+const editForm = document.querySelector('.img-upload__overlay');
+const effectsList = editForm.querySelector('.effects__list');
+const imageElement = editForm.querySelector('.img-upload__preview').children[0];
+const sliderField = editForm.querySelector('.img-upload__effect-level');
+const sliderElement = editForm.querySelector('.effect-level__slider');
+const effectLevel = editForm.querySelector('.effect-level__value');
 
 const effects = {
   none: () => {
@@ -78,7 +79,20 @@ const setSliderOptions = (effect) => {
   effectLevel.value = options.MAX;
 };
 
-const onFilterListClick = (evt) => {
+const setDefaultFilter = () => {
+  const defaultRadio = effectsList.querySelector('#effect-none');
+  defaultRadio.checked = true;
+
+  if (currentEffect !== '') {
+    imageElement.classList.remove(currentEffect);
+  }
+
+  currentEffect = '';
+
+  imageElement.style.filter = effects['none']();
+};
+
+const onEffectsListClick = (evt) => {
   let target = evt.target;
 
   if (target.classList.contains('effects__radio')) {
@@ -107,5 +121,7 @@ const onSliderChange = () => {
   imageElement.style.filter = effects[currentEffect.replace('effects__preview--', '')]();
 };
 
-filtersList.addEventListener('click', onFilterListClick);
+effectsList.addEventListener('click', onEffectsListClick);
 sliderElement.noUiSlider.on('change', onSliderChange);
+
+export {setDefaultFilter};
