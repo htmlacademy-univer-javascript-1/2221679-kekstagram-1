@@ -3,7 +3,7 @@ const Urls = {
   'POST': 'https://26.javascript.pages.academy/kekstagram'
 };
 
-const getRequest = (onSuccess, onError, method, body) => () => fetch(
+const sendRequest = (onSuccess, onError, method, body) => () => fetch(
   Urls[method],
   {
     method: method,
@@ -22,4 +22,4 @@ const getRequest = (onSuccess, onError, method, body) => () => fetch(
     onError(data);
   });
 
-export { getRequest };
+export { sendRequest };

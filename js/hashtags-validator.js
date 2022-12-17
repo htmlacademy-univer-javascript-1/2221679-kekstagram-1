@@ -2,8 +2,8 @@ const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAGS = 5;
 
 const inputForm = document.querySelector('.img-upload__form');
-const submitButton = document.querySelector('.img-upload__submit');
-const inputHashtag = document.querySelector('.text__hashtags');
+const submitButton = inputForm.querySelector('.img-upload__submit');
+const inputHashtag = inputForm.querySelector('.text__hashtags');
 
 const pristine = new Pristine(inputForm, {
   classTo: 'img-upload__field-wrapper',
